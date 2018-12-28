@@ -10,12 +10,23 @@ For accessing images of each glyph used in a font, First we extract the glyphs f
 
 ## prequisites
 
+- Python +3
 - [fontforge](https://github.com/fontforge/fontforge)
 - [ImageMagick](https://github.com/ImageMagick/ImageMagick)
 
 ## Extracting glyphs
 
 We use fontforge to extract the glyphs for each font, it has a python interpreter which can be used to work with fonts as described [here](http://fontforge.github.io/en-US/documentation/scripting/python/#Glyph).
+
+```shell
+# Linux (Debian)
+sudo add-apt-repository ppa:fontforge/fontforge;
+sudo apt-get update;
+sudo apt-get install fontforge;
+
+# Windows (requires chocolatey)
+choco install fontforge
+```
 
 so after installing, add the `bin` folder of the program to your systems `PATH` variable so you can use `ffpython` in your terminal.
 
