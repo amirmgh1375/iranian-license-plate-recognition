@@ -62,5 +62,6 @@ cd 'KHORSHID'
 # Windows
 cd 'KHORSHID'
 
-for %i in (*.png) do magick convert %i -transparent white -trim -gravity center %~ni-trim.png
+for %i in (*.png) do magick convert %i -transparent white -trim -gravity center -resize x65 %~ni-trim.png
+for %i in (*-trim.png) do magick convert %i -resize "x65" %~ni-out.png
 ```
