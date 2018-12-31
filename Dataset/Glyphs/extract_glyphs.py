@@ -2,7 +2,6 @@ import os
 import glob
 import csv
 import subprocess
-from time import sleep
 
 # Fonts we want to extract glyphs from
 fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
