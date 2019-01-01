@@ -1,6 +1,10 @@
 # Fonts
 
+Here you can find Files and Name-Maps for fonts used in the project to create license plates. 
+
 ## Font files
+
+Fonts are available in `.tff` format. they are used to extract glyphs (characters) of font for creating custom virtual license plates.
 
 ## Name-Maps
 
@@ -9,5 +13,7 @@ A mapping from the glyph name to the number or pronunciation of letter the glyph
 #### e.g.
 
 letter `ج` in `traffic_bold` font is named as `u062C`, the name mapping provides would be `JIM`, also number `۲` which is named `two` will be `2`.
+
+---
 
 > if you want to use another font, name it in snake_case then create the `namesMap.csv` file with the same structure as others and name it `<FontName>_namesMap.csv`.

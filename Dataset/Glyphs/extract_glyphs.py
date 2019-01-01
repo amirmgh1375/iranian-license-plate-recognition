@@ -8,6 +8,7 @@ fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endsw
 
 def getExtractorScript(fontAddr, pixelSize=600):
     return f'''
+# Credit: https://superuser.com/a/1338994
 import fontforge
 F = fontforge.open("../{fontAddr}")
 for name in F:
