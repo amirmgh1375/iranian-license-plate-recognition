@@ -21,7 +21,7 @@ for font in fonts:
     # Set font file address
     fontAddr = os.path.join('../Fonts/', font)
     
-    # Create font directory is not exists
+    # Create font directory if not exists
     if not os.path.exists(font): os.mkdir(font)
     # Delete all files in the font directory
     oldFilesList = [ f for f in os.listdir(font) if f.endswith(".png") ]

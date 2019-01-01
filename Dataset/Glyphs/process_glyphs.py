@@ -1,13 +1,12 @@
 import os
-import glob
-import csv
-import subprocess
 import PythonMagick as PM
+from tqdm import tqdm
 
 # List of Fonts to look for extracted images of glyphs
 fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
 # fonts = ['traffic_bold']
 
+fontsProgBar = tqdm(total=len(fonts), desc='Fonts')
 for font in fonts:
     # Getting list of old _trim images and delete them
     oldProcessedImages = [image for image in os.listdir(font) if image.endswith('_trim.png')]
@@ -19,6 +18,8 @@ for font in fonts:
     # Define colors
     white = PM.Color("#ffffff")
     trans = PM.Color("#00000000")
+
+    glyphProgBar = tqdm(total=len(images), desc='Glyphs', leave=False)
     for image in images:
         # Read the image
         glyphImage = PM.Image(os.path.join(font, image))
@@ -35,3 +36,8 @@ for font in fonts:
         else:
             glyphImage.resize('x58')
         glyphImage.write(os.path.join(font, f'{image.split(".")[0]}_trim.png'))
+
+        glyphProgBar.update(1)
+    glyphProgBar.close()
+    fontsProgBar.update(1)
+fontsProgBar.close()
