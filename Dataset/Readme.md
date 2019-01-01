@@ -21,3 +21,7 @@ Glyphs (characters) used in plates including numbers and letters are extracted f
 ![](../Assets/plate_templates.png)
 
 Different plate templates are used to represent the functionality and origin of the vehicle. you can find the images of these templates with numbers and letters removed, and a `psd` file containing all of these images in the `Templates` directory.
+
+## Generated plates
+
+> Still on process...
