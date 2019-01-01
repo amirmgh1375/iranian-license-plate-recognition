@@ -14,9 +14,9 @@ Here is an explanation on how image of glyphs are created:
 
 ### Extracting glyphs
 
-#### Installing `fontforge`
-
 We use fontforge to extract the glyphs for each font, it has a python interpreter which can be used to work with fonts as described [here](http://fontforge.github.io/en-US/documentation/scripting/python/#Glyph).
+
+#### Installing `fontforge`
 
 ```shell
 # Linux (Debian)
