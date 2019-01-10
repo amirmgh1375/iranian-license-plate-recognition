@@ -4,7 +4,7 @@ import csv
 import subprocess
 
 # Fonts we want to extract glyphs from
-fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
+fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if font.endswith('.ttf')]
 
 def getExtractorScript(fontAddr, pixelSize=600):
     return f'''

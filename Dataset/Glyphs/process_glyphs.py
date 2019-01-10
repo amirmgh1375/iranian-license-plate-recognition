@@ -3,11 +3,12 @@ import PythonMagick as PM
 from tqdm import tqdm
 
 # List of Fonts to look for extracted images of glyphs
-fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
-# fonts = ['traffic_bold']
+# fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if font.endswith('.ttf')]
+fonts = ['roya_bold']
 
 fontsProgBar = tqdm(total=len(fonts), desc='Fonts')
 for font in fonts:
+    print(font)
     # Getting list of old _trim images and delete them
     oldProcessedImages = [image for image in os.listdir(font) if image.endswith('_trim.png')]
     for image in oldProcessedImages:
@@ -32,9 +33,9 @@ for font in fonts:
         # otherwise 58 pixel height.
         if os.path.splitext(image)[0].isnumeric():
             if os.path.splitext(image)[0] == '0': glyphImage.resize('x35')
-            else: glyphImage.resize('x87')
+            else: glyphImage.resize('67x70')
         else:
-            glyphImage.resize('x58')
+            glyphImage.resize('90x70')
         glyphImage.write(os.path.join(font, f'{image.split(".")[0]}_trim.png'))
 
         glyphProgBar.update(1)

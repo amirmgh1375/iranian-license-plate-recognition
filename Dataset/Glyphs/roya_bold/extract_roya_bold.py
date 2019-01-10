@@ -1,4 +1,5 @@
 
+# Credit: https://superuser.com/a/1338994
 import fontforge
 F = fontforge.open("../../Fonts/roya_bold")
 for name in F:
