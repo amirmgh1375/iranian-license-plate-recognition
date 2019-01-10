@@ -69,7 +69,7 @@ After that, we use a `ImageMagick` wrapper for python called `PythonMagick` to r
 
 #### Installing `PythonMagick`
 
-To install PythonMagick You can go to this website, download the WHL file named `PythonMagick-0.9.12-cp37-none-win_amd64.whl`, and install it via `pip install <whl file>`.
+To install PythonMagick You can go to [this website](https://www.lfd.uci.edu/~gohlke/pythonlibs/), download the WHL file named `PythonMagick-0.9.12-cp37-none-win_amd64.whl`, and install it via `pip install <whl file>`.
 
 #### processing
 
