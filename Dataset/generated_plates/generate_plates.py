@@ -5,10 +5,12 @@ import numpy as np
 import cv2
 import imutils
 import time
+from tqdm import tqdm
 
 # Characters of Letters and Numbers in Plates
 numbers = [str(i) for i in range(0, 10)]
-letters = ['ALEF', 'BE', 'PE', 'TE', 'SE', 'JIM', 'CHE', 'HE', 'KHE', 'DAL', 'ZAL', 'RE', 'ZE', 'ZHE', 'SIN','SHIN', 'SAD', 'ZAD', 'TA', 'ZA', 'EIN', 'GHEIN', 'FE', 'GHAF', 'KAF', 'GAF', 'LAM', 'MIM', 'NON', 'VAV', 'HA', 'YE']
+# letters = ['ALEF', 'BE', 'PE', 'TE', 'SE', 'JIM', 'CHE', 'HE', 'KHE', 'DAL', 'ZAL', 'RE', 'ZE', 'ZHE', 'SIN','SHIN', 'SAD', 'ZAD', 'TA', 'ZA', 'EIN', 'GHEIN', 'FE', 'GHAF', 'KAF', 'GAF', 'LAM', 'MIM', 'NON', 'VAV', 'HA', 'YE']
+letters = ['AA', 'BA', 'PA', 'TA', 'SA', 'JA', 'CA', 'HA', 'KB', 'DA', 'ZA', 'RA', 'ZB', 'ZE', 'SB','SH', 'SC', 'ZC', 'TB', 'ZD', 'EA', 'GA', 'FA', 'GB', 'KA', 'GC', 'LA', 'MA', 'NA', 'VA', 'HB', 'YA']
 
 # Fonts and Templates
 # fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
@@ -22,7 +24,7 @@ noises = os.listdir('../Noises')
 transformations = ['rotate_right', 'rotate_left', 'zoom_in', 'zoom_out', 'prespective_transform']
 
 # Count of permutations
-permutations = 2
+permutations = 1
 
 # Generateplate array from string 
 # (37GAF853 -> ['3', '7', 'GAF', '8', '5', '3'])
@@ -38,7 +40,7 @@ def plateFromName (nameStr):
 
 # Returns a plate as a string
 def getPlateName(n1, n2, l, n3, n4, n5):
-    return f'{n1}{n2}_{l}_{n3}{n4}{n5}'
+    return f'{n1}{n2}{l}{n3}{n4}{n5}'
 
 # Returns Address of a glyph image given font, and glyph name
 def getGlyphAddress(font, glyphName):
@@ -113,6 +115,9 @@ def applyTransforms (plate):
     
     return transformedTemplates
 
+
+idCounter = 0
+fontsProgBar = tqdm(total=len(fonts)*len(templates)*permutations*len(noises)*(len(transformations)-1)*3, desc='Generating Plate...')
 for font in fonts:
     # Create font directory if not exists
     if not os.path.exists(font): os.mkdir(font)
@@ -120,6 +125,8 @@ for font in fonts:
 
     for template in templates:
         for i in range(permutations):
+            idCounter += 1
+
             # Generate a plate as an array
             # e.g. ['3', '7', 'GAF', '8', '5', '3']
             plate = getNewPlate()
@@ -147,12 +154,27 @@ for font in fonts:
                 else: newPlate.paste(glyph, (70 + w,25), mask=glyph)
                 w += glyph.size[0] + 11
             
+            idCounter += 1
             # Save Simple Plate
-            newPlate.save(f"{font}/{plateName}_{template.split('-')[1]}.png")
+            _newPlate = newPlate.resize((312,70), Image.ANTIALIAS)
+            fontsProgBar.update(1)
+            _newPlate.save(f"{font}/{plateName}_{template.split('-')[1]}{random.randint(0,20)}{idCounter}.png")
             # newPlate.show(f"{font}/{plateName}_{template.split('-')[1]}.png")
-            
+            idCounter += 1
             noisyTemplates = applyNoise(newPlate)
             for noisyTemplate in noisyTemplates:
+                idCounter += 1
+                fontsProgBar.update(1)
+                _noisyTemplate = noisyTemplate.resize((312,70), Image.ANTIALIAS)
+                _noisyTemplate.save(f"{font}/{plateName}_{template.split('-')[1]}{random.randint(0,20)}{idCounter}.png")
                 transformedTemplates = applyTransforms(noisyTemplate)
                 for transformedTemplate in transformedTemplates:
-                    transformedTemplate.save(f"{font}/{plateName}_{template.split('-')[1]}_{random.randint(0,20)}.png")
+                    idCounter += 1
+                    _transformedTemplate = transformedTemplate.resize((312,70), Image.ANTIALIAS)
+                    fontsProgBar.update(1)
+                    _transformedTemplate.save(f"{font}/{plateName}_{template.split('-')[1]}{random.randint(0,20)}{idCounter}.png")
+        fontsProgBar.update(1)
+    fontsProgBar.update(1)
+fontsProgBar.update(1)
+
+fontsProgBar.close()
