@@ -2,6 +2,12 @@
 
 Using **YOLO** object detection for Detecting plates and a combination of **CNN and LSTM with CTC Loss** for OCR.
 
+## Summary
+
+![](Assets/YoLo.png)
+![](Assets/CNN_LSTM_CTC.png)
+
+
 ## Dataset
 
 ### Fonts
