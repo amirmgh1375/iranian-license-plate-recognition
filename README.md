@@ -97,3 +97,8 @@ Different plate templates are used to represent the functionality and origin of 
 ## Generated plates
 
 > Still on process...
+
+
+## Model Specs.
+
+![](https://camo.githubusercontent.com/c756a5d464b9189f0ed72e3b156898c5e056d5f5/687474703a2f2f63732e636d752e6564752f7e79756e7469616e642f4f43522d322e6a7067)
