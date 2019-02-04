@@ -4,13 +4,14 @@ import random
 import numpy as np
 import cv2
 import imutils
+import csv
 import time
 from tqdm import tqdm
 
 # Characters of Letters and Numbers in Plates
 numbers = [str(i) for i in range(0, 10)]
 # letters = ['ALEF', 'BE', 'PE', 'TE', 'SE', 'JIM', 'CHE', 'HE', 'KHE', 'DAL', 'ZAL', 'RE', 'ZE', 'ZHE', 'SIN','SHIN', 'SAD', 'ZAD', 'TA', 'ZA', 'EIN', 'GHEIN', 'FE', 'GHAF', 'KAF', 'GAF', 'LAM', 'MIM', 'NON', 'VAV', 'HA', 'YE']
-letters = ['AA', 'BA', 'PA', 'TA', 'SA', 'JA', 'CA', 'HA', 'KB', 'DA', 'ZA', 'RA', 'ZB', 'ZE', 'SB','SH', 'SC', 'ZC', 'TB', 'ZD', 'EA', 'GA', 'FA', 'GB', 'KA', 'GC', 'LA', 'MA', 'NA', 'VA', 'HB', 'YA']
+# letters = ['AA', 'BA', 'PA', 'TA', 'SA', 'JA', 'CA', 'HA', 'KB', 'DA', 'ZA', 'RA', 'ZB', 'ZE', 'SB','SH', 'SC', 'ZC', 'TB', 'ZD', 'EA', 'GA', 'FA', 'GB', 'KA', 'GC', 'LA', 'MA', 'NA', 'VA', 'HB', 'YA']
 
 # Fonts and Templates
 # fonts = [font.split('.')[0] for font in os.listdir('../Fonts') if not font.endswith('.csv')]
@@ -122,6 +123,13 @@ for font in fonts:
     # Create font directory if not exists
     if not os.path.exists(font): os.mkdir(font)
     # time.sleep(0.1)
+
+    # Getting the letters list from nameMap csv
+    letters = []
+    with open(f'../Fonts/{font}_namesMap.csv') as nameMapCsv:
+        reader = csv.reader(nameMapCsv)
+        next(reader) # Skipping header
+        letters = [rows[1] for rows in reader]
 
     for template in templates:
         for i in range(permutations):
